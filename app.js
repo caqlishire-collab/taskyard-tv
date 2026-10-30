@@ -277,9 +277,10 @@
     status.className = "status" + (state.failed ? " stale" : "");
     status.appendChild(el("span", "live"));
     var when = state.updatedAt || state.fetchedAt;
-    var text = state.failed
-      ? "Can’t reach iCloud. Showing the board from " + (when ? timeFormat.format(when) : "earlier") + "."
-      : "Updated " + (when ? timeFormat.format(when) : "just now") + ". Refreshes every minute.";
+    var text;
+    if (state.failed && !state.board) text = "Can’t reach iCloud yet. Trying again every minute.";
+    else if (state.failed) text = "Can’t reach iCloud. Showing the board from " + (when ? timeFormat.format(when) : "earlier") + ".";
+    else text = "Updated " + (when ? timeFormat.format(when) : "just now") + ". Refreshes every minute.";
     status.appendChild(document.createTextNode(text));
   }
 
@@ -295,6 +296,7 @@
   function showBoard(code) {
     $("setup").hidden = true;
     $("main").hidden = false;
+    renderClock(); // the clock shows straight away, even before the first board arrives
     refresh(code);
     setInterval(function () { refresh(code); }, (config.refreshSeconds || 60) * 1000);
     setInterval(renderClock, 15000);
