@@ -1,0 +1,196 @@
+/* Taskyard wall board. Visual rules from .claude/skills/landing-page-design (Part B):
+   Geist only, Tailwind type steps, the fixed spacing scale, flat dark surfaces from the
+   approved list, one gradient (hero text), and the decelerating base curve. Flexbox only,
+   so older Samsung TV browsers lay it out correctly. */
+
+@font-face { font-family: "Geist"; src: url("Geist-Regular.otf") format("opentype"); font-weight: 400; }
+@font-face { font-family: "Geist"; src: url("Geist-Medium.otf") format("opentype"); font-weight: 500; }
+@font-face { font-family: "Geist"; src: url("Geist-SemiBold.otf") format("opentype"); font-weight: 600; }
+
+:root {
+  --bg: #181818;
+  --surface: #1F1F1F;
+  --raised: #272727;
+  --line: #313131;
+  --text: #FFFFFF;
+  --muted: #A3A3A3;
+  --brand: #22996E;
+  --overdue: #F06A5F;
+  --curve: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Geist", system-ui, sans-serif;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+[hidden] { display: none !important; }
+
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+.skip {
+  position: absolute; left: 16px; top: -64px;
+  padding: 8px 12px; border-radius: 8px;
+  background: var(--brand); color: #fff; text-decoration: none;
+}
+.skip:focus { top: 16px; }
+
+/* Hero heading: the one gradient, on text only (skill B5). */
+.hero {
+  margin: 0;
+  max-width: 680px;
+  font-size: 48px; line-height: 1;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  background: linear-gradient(90deg, #FFFFFF, #9B9B9B);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+}
+
+/* ---------- Setup ---------- */
+
+.setup {
+  min-height: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 48px;
+}
+.setup-icon { width: 96px; height: 96px; border-radius: 24px; margin-bottom: 32px; }
+.setup .hero { text-align: center; }
+.lede { margin: 24px 0 40px; color: var(--muted); font-size: 24px; line-height: 32px; }
+.setup-form { display: flex; align-items: center; }
+.setup-form input {
+  width: 360px; margin-right: 16px;
+  padding: 16px 24px; border-radius: 16px;
+  border: 2px solid var(--line); background: var(--surface); color: var(--text);
+  font: 600 36px/40px "Geist", sans-serif; letter-spacing: 0.12em; text-transform: uppercase;
+  outline: none; transition: border-color 300ms var(--curve);
+}
+.setup-form input:focus { border-color: var(--brand); }
+.setup-form button, .link {
+  font-family: inherit; cursor: pointer;
+  transition: transform 200ms var(--curve), opacity 300ms var(--curve), background-color 300ms var(--curve);
+}
+.setup-form button {
+  padding: 16px 32px; border-radius: 16px; border: 0;
+  background: var(--brand); color: #fff; font-size: 24px; line-height: 32px; font-weight: 600;
+}
+.setup-form button:hover { opacity: 0.9; }
+.setup-form button:active, .link:active { transform: scale(0.98); }
+.setup-form button:focus-visible, .link:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+.error { min-height: 32px; margin: 24px 0 0; color: var(--overdue); font-size: 20px; line-height: 28px; }
+
+/* ---------- Board ---------- */
+
+.board { display: flex; flex-direction: column; height: 100%; padding: 40px 48px 24px; }
+
+.top { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 32px; }
+.title { min-width: 0; }
+.lists { display: flex; flex-wrap: wrap; margin-top: 16px; }
+.list-chip {
+  display: flex; align-items: center;
+  margin: 0 8px 8px 0; padding: 4px 12px; border-radius: 9999px;
+  background: var(--surface); border: 1px solid var(--line);
+  font-size: 18px; line-height: 28px; color: var(--muted);
+}
+.dot { width: 12px; height: 12px; border-radius: 9999px; margin-right: 8px; flex: none; }
+
+.clock { text-align: right; }
+.time { font-size: 72px; line-height: 1; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.date { margin-top: 8px; font-size: 24px; line-height: 32px; color: var(--muted); }
+
+.columns { display: flex; flex: 1; min-height: 0; }
+.column { display: flex; flex-direction: column; flex: 1; min-width: 0; margin-right: 32px; }
+.column:last-child { margin-right: 0; }
+.column.wide { flex: 1.4; }
+.column h2 {
+  margin: 0 0 16px; font-size: 30px; line-height: 36px; font-weight: 600;
+  display: flex; align-items: center;
+}
+.count {
+  margin-left: 12px; padding: 0 12px; border-radius: 9999px;
+  background: var(--raised); color: var(--muted); font-size: 20px; line-height: 28px; font-weight: 500;
+}
+.stack { flex: 1; min-height: 0; overflow: hidden; }
+
+.day-label { margin: 24px 0 8px; font-size: 20px; line-height: 28px; font-weight: 600; color: var(--muted); }
+.day-label:first-child { margin-top: 0; }
+
+/* A task card: full border, never one-sided (skill B4); colour comes from the dot. */
+.task {
+  display: flex; align-items: flex-start;
+  margin-bottom: 12px; padding: 16px; border-radius: 16px;
+  background: var(--surface); border: 1px solid var(--line);
+  /* Visible by default; the entrance only plays where animations run. */
+  animation: rise 700ms var(--curve) backwards;
+}
+.task.now { border: 2px solid var(--brand); background: #1F2A25; }
+.task.overdue { border-color: #5A2E2A; }
+.task .when {
+  flex: none; width: 128px; margin-right: 16px;
+  font-size: 20px; line-height: 28px; font-weight: 600; font-variant-numeric: tabular-nums;
+}
+.task .when small { display: block; font-size: 18px; line-height: 28px; font-weight: 400; color: var(--muted); }
+.task.overdue .when { color: var(--overdue); }
+.task .body { flex: 1; min-width: 0; }
+.task .name {
+  font-size: 24px; line-height: 32px; font-weight: 500;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.task .meta { display: flex; flex-wrap: wrap; align-items: center; margin-top: 4px; color: var(--muted); font-size: 18px; line-height: 28px; }
+.task .meta > * { margin-right: 16px; }
+.flag { color: var(--overdue); font-weight: 600; }
+.pill { padding: 0 8px; border-radius: 9999px; background: var(--raised); }
+.badge-now {
+  margin-left: 12px; padding: 0 12px; border-radius: 9999px;
+  background: var(--brand); color: #fff; font-size: 18px; line-height: 28px; font-weight: 600;
+}
+.compact .task { padding: 12px 16px; }
+.compact .task .name { font-size: 20px; line-height: 28px; }
+.compact .task .when { width: 96px; font-size: 18px; }
+
+.empty {
+  padding: 24px; border-radius: 16px; border: 1px dashed var(--line);
+  color: var(--muted); font-size: 20px; line-height: 28px;
+}
+.more { margin-top: 4px; color: var(--muted); font-size: 18px; line-height: 28px; }
+
+.foot {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line);
+  color: var(--muted); font-size: 18px; line-height: 28px;
+}
+.status .live { display: inline-block; width: 10px; height: 10px; border-radius: 9999px; background: var(--brand); margin-right: 8px; }
+.status.stale .live { background: #E0A43A; }
+.link { background: none; border: 0; color: var(--muted); font-size: 18px; text-decoration: underline; padding: 4px 8px; }
+
+/* Safety net: if a browser stalls the entrance, cards still end fully visible. */
+.settled .task { animation: none; }
+
+@keyframes rise { from { opacity: 0; transform: translateY(32px); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .task { animation: fade 300ms var(--curve) backwards; }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+}
+
+/* Smaller screens (a laptop preview, 720p TVs): step every size down. */
+@media (max-width: 1500px) {
+  html, body { font-size: 14px; }
+  .board { padding: 24px 32px 16px; }
+  .hero { font-size: 36px; }
+  .time { font-size: 48px; }
+  .date, .lede { font-size: 20px; line-height: 28px; }
+  .column h2 { font-size: 24px; line-height: 32px; }
+  .task { padding: 12px; }
+  .task .name { font-size: 20px; line-height: 28px; }
+  .task .when, .day-label { font-size: 18px; line-height: 28px; }
+  .task .when { width: 112px; }
+  .task .meta, .list-chip, .foot, .more { font-size: 16px; line-height: 24px; }
+}

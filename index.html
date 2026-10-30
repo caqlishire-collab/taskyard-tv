@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Taskyard board</title>
+  <meta name="description" content="Taskyard's wall TV schedule.">
+  <link rel="icon" href="icon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to schedule</a>
+
+  <!-- Shown until a board code is entered; the code is remembered on this TV. -->
+  <section id="setup" class="setup" hidden>
+    <img class="setup-icon" src="icon.png" alt="Taskyard">
+    <h1 class="hero">Show your schedule<br>on this screen</h1>
+    <p class="lede">Enter the board code from Taskyard on your iPhone:<br>Settings, Wall TV, Board code.</p>
+    <form id="setup-form" class="setup-form" autocomplete="off">
+      <label for="code" class="sr">Board code</label>
+      <input id="code" name="code" maxlength="8" placeholder="K7Q2M9XD" spellcheck="false" autocapitalize="characters">
+      <button type="submit">Show board</button>
+    </form>
+    <p id="setup-error" class="error" role="alert"></p>
+  </section>
+
+  <main id="main" class="board" hidden>
+    <header class="top">
+      <div class="title">
+        <h1 class="hero" id="heading">Today’s schedule</h1>
+        <div id="lists" class="lists"></div>
+      </div>
+      <div class="clock">
+        <div id="time" class="time"></div>
+        <div id="date" class="date"></div>
+      </div>
+    </header>
+
+    <div class="columns">
+      <section class="column wide" aria-labelledby="today-h">
+        <h2 id="today-h">Today</h2>
+        <div id="today" class="stack"></div>
+      </section>
+      <section class="column" aria-labelledby="tomorrow-h">
+        <h2 id="tomorrow-h">Tomorrow</h2>
+        <div id="tomorrow" class="stack"></div>
+      </section>
+      <section class="column" aria-labelledby="week-h">
+        <h2 id="week-h">Coming up</h2>
+        <div id="week" class="stack"></div>
+      </section>
+    </div>
+
+    <footer class="foot">
+      <span id="status" class="status"></span>
+      <button id="change" class="link" type="button">Change board</button>
+    </footer>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
