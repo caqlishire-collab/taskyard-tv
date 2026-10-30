@@ -79,9 +79,11 @@
     if (demo) return Promise.resolve(demoBoard());
     var url = "https://api.apple-cloudkit.com/database/1/" + encodeURIComponent(config.container) + "/" +
       encodeURIComponent(environment) + "/public/records/lookup?ckAPIToken=" + encodeURIComponent(config.apiToken);
+    // Sent as text/plain on purpose: a JSON content type makes browsers send a CORS preflight,
+    // which CloudKit's servers don't approve. CloudKit reads the body as JSON either way.
     return fetch(url, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "text/plain" },
       body: JSON.stringify({ records: [{ recordName: "board-" + code }] })
     }).then(function (response) {
       if (!response.ok) throw new Error("http " + response.status);
