@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Join tasks in Taskyard</title>
+  <meta name="description" content="Open a Taskyard invite to see shared tasks, add your own and mark them done.">
+  <meta name="robots" content="noindex">
+  <meta name="apple-itunes-app" content="app-id=6828300075">
+  <link rel="icon" href="icon.png">
+  <link rel="stylesheet" href="page.css">
+</head>
+<body>
+  <main class="doc">
+    <a class="brand" href="support.html"><img src="icon.png" alt="" width="40" height="40"><span>Taskyard</span></a>
+
+    <div id="invite" hidden>
+      <h1>You’re invited to help with tasks</h1>
+      <p>Someone shared their Taskyard tasks with you. Open the invite on your iPhone or iPad to see the tasks, add your own and mark them done.</p>
+
+      <ol class="steps">
+        <li>
+          <h2>Get Taskyard</h2>
+          <p>It’s free on the App Store. Skip this if you already have it.</p>
+          <a class="button secondary" href="https://apps.apple.com/app/id6828300075">Get it on the App Store</a>
+        </li>
+        <li>
+          <h2>Open the invite</h2>
+          <p>Taskyard asks for your name, then shows the shared tasks.</p>
+          <a class="button" id="open" href="support.html">Open in Taskyard</a>
+        </li>
+      </ol>
+
+      <section class="card" aria-labelledby="code-title">
+        <h3 id="code-title">If the button doesn’t open the app</h3>
+        <p>Open Taskyard, tap People at the top left, and paste this invite code under “Join someone’s tasks”.</p>
+        <p class="code" id="code"></p>
+        <button class="button secondary" id="copy" type="button">Copy code</button>
+        <p class="meta" id="copied" role="status" aria-live="polite"></p>
+      </section>
+
+      <p class="meta">Anyone with this link can see and change the shared tasks, so don’t pass it on. The code is the part of the link after #, which your browser doesn’t send to this website.</p>
+    </div>
+
+    <div id="missing" hidden>
+      <h1>This invite link is incomplete</h1>
+      <p>The link is missing its invite code, which usually happens when part of it gets cut off. Ask the person who invited you to send it again.</p>
+    </div>
+
+    <noscript>
+      <h1>Open this invite in Taskyard</h1>
+      <p>Open Taskyard on your iPhone or iPad, tap People at the top left, and paste the whole link under “Join someone’s tasks”.</p>
+    </noscript>
+
+    <p class="meta"><a href="support.html">Support</a> · <a href="privacy.html">Privacy policy</a></p>
+  </main>
+  <script src="join.js"></script>
+</body>
+</html>
