@@ -1,8 +1,8 @@
 @font-face { font-family: "Geist"; src: url("Geist-Regular.otf") format("opentype"); font-weight: 400; }
 @font-face { font-family: "Geist"; src: url("Geist-Medium.otf") format("opentype"); font-weight: 500; }
 @font-face { font-family: "Geist"; src: url("Geist-SemiBold.otf") format("opentype"); font-weight: 600; }
-:root { --bg: #F5F5F4; --text: #181818; --muted: #5C5C5C; --brand: #1E9C6D; }
-@media (prefers-color-scheme: dark) { :root { --bg: #181818; --text: #FFFFFF; --muted: #A3A3A3; --brand: #3DC48F; } }
+:root { --bg: #F5F5F4; --text: #181818; --muted: #5C5C5C; --brand: #1E9C6D; --on-brand: #FFFFFF; }
+@media (prefers-color-scheme: dark) { :root { --bg: #181818; --text: #FFFFFF; --muted: #A3A3A3; --brand: #3DC48F; --on-brand: #06281C; } }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--text); font: 400 16px/24px "Geist", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
 .doc { max-width: 680px; margin: 0 auto; padding: 48px 16px 64px; }
@@ -19,9 +19,9 @@ a:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; border-r
 /* Invite page */
 .steps { list-style: none; counter-reset: step; margin: 32px 0 0; padding: 0; }
 .steps li { counter-increment: step; position: relative; padding: 0 0 32px 48px; }
-.steps li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 32px; height: 32px; border-radius: 9999px; background: var(--brand); color: #fff; font-weight: 600; font-size: 14px; line-height: 32px; text-align: center; }
+.steps li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 32px; height: 32px; border-radius: 9999px; background: var(--brand); color: var(--on-brand); font-weight: 600; font-size: 14px; line-height: 32px; text-align: center; }
 .steps h2 { margin: 0 0 4px; }
-.button { display: inline-block; margin-top: 4px; padding: 8px 12px; border: 1px solid var(--brand); border-radius: 8px; background: var(--brand); color: #fff; font: 600 16px/24px "Geist", system-ui, sans-serif; text-decoration: none; cursor: pointer; transition: opacity 300ms cubic-bezier(0.22, 1, 0.36, 1), transform 200ms cubic-bezier(0.22, 1, 0.36, 1); }
+.button { display: inline-block; margin-top: 4px; padding: 8px 12px; border: 1px solid var(--brand); border-radius: 8px; background: var(--brand); color: var(--on-brand); font: 600 16px/24px "Geist", system-ui, sans-serif; text-decoration: none; cursor: pointer; transition: opacity 300ms cubic-bezier(0.22, 1, 0.36, 1), transform 200ms cubic-bezier(0.22, 1, 0.36, 1); }
 .button.secondary { background: transparent; color: var(--brand); }
 .button:hover { opacity: 0.85; }
 .button:active { transform: scale(0.98); }
